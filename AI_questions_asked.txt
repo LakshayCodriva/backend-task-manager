@@ -1,0 +1,18 @@
+Prompt 1 :
+I have to design and implement a backend from scratch using NodeJs, ExpressJs and Postgresql. I'll give you the design instructions, give me the entire structure for the scenario covering the edge cases and also including only necessary code. Do not make code look verbose or increase the boilerplate unnecessary. I'll give you the objectives and you proceed assuming yourself to be a very senior software developer.
+
+Prompt 2 :
+1. Problem Statement A small team wants a backend to manage daily tasks. Team members can create tasks, assign them to a teammate, set a priority (low, medium, high) and a due date, then mark them as done. The manager wants to see overdue tasks and each member's pending task count. Database Schema users(id, name, email) tasks(id, title, assigned_to, priority, status, due_date, created_at)
+
+Prompt 3 :
+2. Challenge Overview Requirements SQL Queries API Endpoints Create & assign tasks All overdue tasks with names POST /tasks Update status (forward only) Pending count per user PATCH /tasks/:id/status Priority levels High-priority tasks due soon GET /tasks?status=&priority= Overdue detection GET /users/:id/tasks Pending count per user
+
+Prompt 4 :
+3. Challenge 1 — Requirements Analysis (40 min) Using the problem statement above, use AI to help you produce a structured requirements document. Your output must include all of the following: • At least 5 user stories in the format: "As a [role], I can [action]" • A list of entities and their attributes (you can use the schema as a starting point) • A complete list of API endpoints with HTTP method and path • Business rules — the specific logic the system must enforce • At least 2 edge cases the system should handle Starter AI prompt — adapt and iterate on this • I am building a task manager API in Node.js. There are two tables: users and tasks. Tasks have a status (todo, in_progress, done) and priority (low, medium, high). Help me write user stories, business rules, and API endpoints. Tip: after the first response, ask AI follow-up questions like "what edge cases are missing?" or "what are the business rules for [X]?" — iterate at least twice.
+
+Prompt 5 :
+Using Node.js + Express, build a working REST API that implements all four endpoints below. You must be able to start the server and demonstrate at least two endpoints working via curl or any API client. POST /tasks Create a new task PATCH /tasks/:id/status Update task status (validated transition) GET /tasks?status=&priority= List tasks with filters GET /users/:id/tasks All tasks assigned to a user Bonus: GET /tasks/overdue — all overdue tasks grouped by assignee Starter AI prompt — adapt and iterate on this • Write a Node.js Express route: PATCH /tasks/:id/status. It should accept a new status in the request body, validate that the transition is forward-only (todo->in_progress->done), update the database, and return an error if the transition is invalid. Use async/await.
+
+Prompt 6 :
+now give me the code for this entire assignment, only include necessary given requirements. give me the strcuture as well as the code from scratch for everything in human understandable form.
+

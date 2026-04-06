@@ -116,3 +116,73 @@ Ans->   http://localhost:3000/users/3/tasks
         "created_at": "2026-04-06T12:55:30.292Z"
     }
 ]
+
+
+5. (Easy) — List all tasks that are overdue (due_date is in the past and status is not done), showing task title, assignee name and due date
+
+Ans-> SELECT
+    t.title,
+    u.name AS assignee_name,
+    t.due_date
+FROM tasks t
+JOIN users u
+ON t.assigned_to = u.id
+WHERE
+    t.due_date < CURRENT_DATE
+    AND t.status != 'done';
+
+
+6. (Easy) — Count pending (todo + in_progress) tasks per user, show only users
+with at least 1 pending task
+
+Ans -> SELECT
+    u.name AS assignee_name,
+    COUNT(t.id) AS pending_task_count
+FROM tasks t
+JOIN users u
+ON t.assigned_to = u.id
+WHERE
+    t.status IN ('todo', 'in_progress')
+GROUP BY
+    u.name
+HAVING
+    COUNT(t.id) > 0;
+
+
+
+7.(Medium) — Find all high-priority tasks that are due today or tomorrow and are not yet done
+Ans-> SELECT
+    id,
+    title,
+    assigned_to,
+    due_date
+FROM tasks
+WHERE
+    priority = 'high'
+    AND due_date BETWEEN CURRENT_DATE
+    AND CURRENT_DATE + INTERVAL '1 day'
+    AND status != 'done';
+
+
+
+8. GET "/tasks/overdue" — all overdue tasks grouped by assignee
+
+Ans-> URL Endpoint : GET http://localhost:3000/tasks/overdue 
+
+Body output :
+[
+    {
+        "name": "Amit",
+        "tasks": [
+            {
+                "id": 10,
+                "title": "Test overdue",
+                "assigned_to": 1,
+                "priority": "high",
+                "status": "todo",
+                "due_date": "2024-01-01T00:00:00",
+                "created_at": "2026-04-06T18:48:41.650711"
+            }
+        ]
+    }
+]
